@@ -31,7 +31,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     } else if (status === 403) {
       messageKey = MESSAGE_KEYS.COMMON.FORBIDDEN;
     } else if (status === 404) {
-      messageKey = MESSAGE_KEYS.USER.NOT_FOUND;
+      messageKey = MESSAGE_KEYS.COMMON.NOT_FOUND;
     } else if (status === 422) {
       messageKey = MESSAGE_KEYS.COMMON.VALIDATION_ERROR;
       if (exceptionResponse.message) {

@@ -46,7 +46,7 @@ export function listResponse<T>(
   total: number,
   page?: number,
   limit?: number,
-  messageKey: string = MESSAGE_KEYS.USER.LIST_FOUND,
+  messageKey: string = MESSAGE_KEYS.COMMON.LIST_FOUND,
 ): ApiResponse<{
   items: T[];
   total: number;
