@@ -1,10 +1,10 @@
-# 🏪 MiniShop
+# 🏪 EventHub
 
-Đồ án website quản lý cửa hàng tạp hóa mini
+Đồ án Eventhub
 
 ## 📋 Mô tả dự án
 
-MiniShop là một ứng dụng web fullstack được xây dựng để quản lý cửa hàng tạp hóa mini:
+
 
 - **Frontend**: Next.js với TypeScript, Tailwind CSS + SCSS
 - **Backend**: NestJS với TypeScript, Swagger UI
@@ -13,7 +13,7 @@ MiniShop là một ứng dụng web fullstack được xây dựng để quản 
 ## 📁 Cấu trúc dự án
 
 ```
-minishop/
+eventhub/
 ├── fe/                    # Frontend - Next.js TypeScript
 │   ├── src/app/          # App Router pages
 │   ├── src/styles/       # SCSS variables & mixins
