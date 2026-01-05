@@ -1,0 +1,53 @@
+// Colors
+$primary-blue: #3b82f6;
+$primary-green: #22c55e;
+
+// Gradients
+$gradient-blue: linear-gradient(135deg, #3b82f6, #1d4ed8);
+$gradient-green: linear-gradient(135deg, #22c55e, #15803d);
+$gradient-purple: linear-gradient(135deg, #8b5cf6, #7c3aed);
+$gradient-red: linear-gradient(135deg, #ef4444, #dc2626);
+
+// Background Colors
+$bg-gray: #f1f5f9;
+$bg-dark: #1e293b;
+
+// Text Colors
+$text-primary: #1e293b;
+$text-secondary: #64748b;
+$text-muted: #94a3b8;
+$text-white: #ffffff;
+
+// Extended Text Colors (Footer & Common)
+$text-dark: #111827;      // Tiêu đề chính, headings
+$text-medium: #374151;    // Text nhấn mạnh, emphasis
+$text-light: #6b7280;     // Text thường, mô tả, body
+$text-brand: #00b853;     // Brand color, hover, highlight
+
+// Spacing
+$space-sm: 0.5rem;
+$space-md: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+
+// Font Sizes
+$text-xs: 0.75rem;
+$text-sm: 0.875rem;
+$text-base: 1rem;
+$text-lg: 1.125rem;
+$text-xl: 1.25rem;
+$text-2xl: 1.5rem;
+
+// Border Radius
+$rounded-lg: 0.5rem;
+
+// Shadows
+$shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+$shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+$shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+// Breakpoints
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px; 

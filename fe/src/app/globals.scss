@@ -1,0 +1,16 @@
+@use 'sass:color';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:focus {
+  outline: 2px solid $primary-blue;
+  outline-offset: 2px;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+} 

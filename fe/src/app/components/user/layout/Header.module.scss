@@ -1,0 +1,464 @@
+/* Container matching Layout.module.scss */
+.container {
+  width: 92%;
+  max-width: 2000px;
+  min-width: 300px;
+  margin: 0 auto;
+  padding: 0 $space-md;
+
+  @media (max-width: 1200px) {
+    width: 95%;
+    padding: 0 $space-md;
+  }
+
+  @media (max-width: 768px) {
+    width: 95%;
+    padding: 0 $space-sm;
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+    padding: 0 $space-md;
+  }
+}
+
+/* Header Main */
+.header {
+  background: white;
+  position: relative;
+  z-index: 40;
+}
+
+/* Header Top Section */
+.headerTop {
+  background: $bg-gray;
+  padding: calc(#{$space-sm} * 1.25) 0; // 10px
+  box-shadow: $shadow-md;
+  border-bottom: 1px solid rgba(236, 236, 236, 0.8);
+
+  @media (max-width: 768px) {
+    padding: $space-md 0; // 15px
+  }
+
+  @media (max-width: 480px) {
+    padding: $space-sm 0;
+  }
+}
+
+.logoImage {
+  height: auto;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+
+  @media (max-width: 768px) {
+    width: 60px !important;
+  }
+
+  @media (max-width: 480px) {
+    width: 50px !important;
+  }
+}
+
+.topContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-xl;
+
+  @media (max-width: 1024px) {
+    gap: $space-lg;
+  }
+
+  @media (max-width: 768px) {
+    gap: $space-md;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 480px) {
+    gap: $space-sm;
+    flex-direction: column;
+  }
+
+  .searchInputContainer {
+    flex: 1;
+    max-width: 500px;
+    min-width: 300px;
+
+    @media (max-width: 768px) {
+      min-width: 250px;
+      max-width: 400px;
+    }
+
+    @media (max-width: 480px) {
+      min-width: 100%;
+      max-width: 100%;
+      order: 2;
+      margin: $space-sm 0;
+    }
+
+    .searchInput {
+      width: 100%;
+      padding: calc(#{$space-sm} * 0.25) $space-lg; // 2px 20px
+    }
+  }
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+
+  @media (max-width: 480px) {
+    order: 1;
+  }
+}
+
+/* Header Items */
+.headerItems {
+  display: flex;
+  align-items: center;
+  gap: $space-xl;
+  flex-shrink: 0;
+
+  @media (max-width: 1024px) {
+    gap: $space-lg;
+  }
+
+  @media (max-width: 768px) {
+    gap: $space-md;
+  }
+
+  @media (max-width: 480px) {
+    gap: calc(#{$space-sm} * 0.75);
+    order: 3;
+    width: 100%;
+    justify-content: space-around;
+    margin-top: $space-sm;
+  }
+}
+
+.headerItem {
+  position: relative;
+}
+
+.headerLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: $text-secondary;
+  transition: all 0.2s ease;
+  padding: $space-sm;
+  border-radius: $rounded-lg;
+
+  &:hover {
+    color: $primary-green;
+    background: rgba(34, 197, 94, 0.05);
+  }
+
+  @media (max-width: 768px) {
+    padding: calc(#{$space-sm} * 0.75);
+  }
+
+  @media (max-width: 480px) {
+    padding: calc(#{$space-sm} * 0.5);
+    flex-direction: column;
+    gap: calc(#{$space-sm} * 0.25);
+  }
+}
+
+.iconWrapper {
+  position: relative;
+  margin-right: $space-sm;
+
+  @media (max-width: 480px) {
+    margin-right: 0;
+  }
+}
+
+.icon {
+  transition: transform 0.2s ease;
+
+  .headerLink:hover & {
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 480px) {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: $primary-green;
+  color: white;
+  font-size: $text-xs;
+  font-weight: 600;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+  box-shadow: $shadow-md;
+
+  @media (max-width: 480px) {
+    min-width: 16px;
+    height: 16px;
+    font-size: calc(#{$text-xs} * 0.85);
+    top: -6px;
+    right: -6px;
+  }
+}
+
+.label {
+  font-weight: 500;
+  font-size: $text-sm;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+
+  @media (max-width: 480px) {
+    display: block;
+    font-size: calc(#{$text-xs} * 0.9);
+    text-align: center;
+  }
+}
+
+/* Navigation Section - STICKY WITH ANIMATION */
+.navSection {
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: calc(#{$space-sm} * 0.75) 0; // Giảm từ $space-md xuống
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+  box-shadow: $shadow-lg;
+  border-bottom: 1px solid rgba(236, 236, 236, 0.8);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100% !important;
+  transform: translateY(0);
+
+  @media (max-width: 768px) {
+    padding: $space-sm 0;
+  }
+  
+  &.scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: $shadow-xl;
+    animation: slideDown 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    .navContent {
+      animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    transform: translateY(-10px);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.navContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+    gap: $space-md;
+  }
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: $space-sm;
+  }
+}
+
+.browseButton {
+  display: flex;
+  align-items: center;
+  padding: calc(#{$space-sm} * 0.5) $space-md; // Giảm padding
+  background: $primary-green;
+  color: white;
+  border: none;
+  border-radius: $rounded-lg;
+  font-weight: 500;
+  font-size: $text-xs; // Giảm từ $text-sm xuống $text-xs
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 4px rgba(34, 197, 94, 0.2);
+  white-space: nowrap;
+
+  &:hover {
+    background: #16a34a;
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 12px rgba(34, 197, 94, 0.4);
+  }
+
+  &:active {
+    transform: translateY(0) scale(1);
+  }
+
+  @media (max-width: 768px) {
+    padding: calc(#{$space-sm} * 0.375) calc(#{$space-sm} * 0.75);
+    font-size: calc(#{$text-xs} * 0.9);
+  }
+
+  @media (max-width: 480px) {
+    padding: calc(#{$space-sm} * 0.5) $space-md;
+    font-size: $text-xs;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: calc(#{$space-xl} + #{$space-sm}); // 2.5rem
+
+  @media (max-width: 1024px) {
+    gap: $space-lg;
+  }
+
+  @media (max-width: 768px) {
+    gap: $space-md;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  @media (max-width: 480px) {
+    display: none;
+  }
+}
+
+.navLink {
+  color: $text-medium;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: $text-xs; // Giảm từ $text-sm xuống $text-xs
+  padding: calc(#{$space-sm} * 0.5) calc(#{$space-sm} * 0.625); // Giảm padding
+  border-radius: calc(#{$rounded-lg} * 0.75);
+  transition: all 0.2s ease;
+  position: relative;
+  white-space: nowrap;
+
+  &:hover {
+    color: $primary-green;
+    background: rgba(34, 197, 94, 0.05);
+  }
+
+  &.active {
+    color: $primary-green;
+    font-weight: 600;
+
+    &::after {
+      content: '';
+      position: absolute;
+      right: calc(-#{$space-sm} * 0.75); // Đặt chấm bên phải text
+      top: 50%;
+      transform: translateY(-50%);
+      width: 4px;
+      height: 4px;
+      background: $primary-green;
+      border-radius: 50%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    font-size: calc(#{$text-xs} * 0.95);
+    padding: calc(#{$space-sm} * 0.375) calc(#{$space-sm} * 0.5);
+  }
+}
+
+/* Phone Info */
+.phoneInfo {
+  text-align: right;
+  flex-shrink: 0;
+
+  @media (max-width: 768px) {
+    text-align: center;
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+    margin-top: $space-sm;
+  }
+}
+
+.phoneNumber {
+  font-size: $text-base; // Giảm thêm từ $text-lg xuống $text-base
+  font-weight: 700;
+  color: $primary-green;
+  line-height: 1.2;
+
+  @media (max-width: 768px) {
+    font-size: $text-sm;
+  }
+
+  @media (max-width: 480px) {
+    font-size: $text-xs;
+  }
+}
+
+.phoneSupport {
+  font-size: calc(#{$text-xs} * 0.9); // Giảm thêm chút nữa
+  color: $text-secondary;
+  font-weight: 500;
+  margin-top: calc(#{$space-sm} * 0.125);
+
+  @media (max-width: 768px) {
+    font-size: calc(#{$text-xs} * 0.85);
+  }
+
+  @media (max-width: 480px) {
+    font-size: calc(#{$text-xs} * 0.8);
+  }
+}
+
+/* Mobile Menu Toggle (if needed in future) */
+.mobileMenuToggle {
+  display: none;
+  
+  @media (max-width: 480px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: $bg-gray;
+    border: none;
+    border-radius: $rounded-lg;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: #e5e7eb;
+    }
+  }
+}
+
+/* Additional responsive utilities - Removed to prevent conflicts with individual class responsive styles */ 
