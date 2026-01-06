@@ -4,16 +4,16 @@
 
 ### Database
 
-- **Provider**: MySQL
-- **Schema**: `be/src/prisma/schema.prisma`
-- **Migrations**: `be/src/prisma/migrations/`
+-   **Provider**: PostgreSQL
+-   **Schema**: `be/src/prisma/schema.prisma`
+-   **Migrations**: `be/src/prisma/migrations/`
 
 ### Environment
 
 Tạo file `.env` trong thư mục `be/`:
 
 ```env
-DATABASE_URL="mysql://root:123456@localhost:3306/minishop_db"
+DATABASE_URL="postgresql://postgres:123456@localhost:5432/loc"
 ```
 
 ## 🎯 Các lệnh cơ bản
@@ -54,7 +54,7 @@ yarn db:seed:users  # Chỉ seed Users
 
 ## 🚨 Lưu ý
 
-- `yarn db:reset` **XÓA TOÀN BỘ** data (chỉ dùng dev)
-- `yarn db:seed` tạo dữ liệu chính thức (admin, master data)
-- `yarn db:seed:all` tạo toàn bộ test data cho development
-- Studio mở tại http://localhost:5555
+-   `yarn db:reset` **XÓA TOÀN BỘ** data (chỉ dùng dev)
+-   `yarn db:seed` tạo dữ liệu chính thức (admin, master data)
+-   `yarn db:seed:all` tạo toàn bộ test data cho development
+-   Studio mở tại http://localhost:5555
