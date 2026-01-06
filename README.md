@@ -1,6 +1,19 @@
-# 🏪 EventHub
+# 🏪 EventHub – Event Management
 
-Đồ án Eventhub
+EventHub là hệ thống backend quản lý sự kiện và bán vé, được xây dựng với mục tiêu mô phỏng **một sản phẩm thực tế trong môi trường doanh nghiệp**.
+
+Dự án tập trung vào việc thiết kế **kiến trúc monolithic chuẩn**, xử lý các **nghiệp vụ cốt lõi và phức tạp** của nền tảng bán vé như quản lý sự kiện, kiểm soát tồn kho vé, xử lý đơn hàng và thanh toán, đồng thời tối ưu hiệu năng và độ ổn định của hệ thống.
+
+---
+
+## Project Overview
+
+EventHub cung cấp backend API cho một nền tảng bán vé với ba nhóm người dùng chính:
+
+- **User**: xem sự kiện, mua vé, quản lý đơn hàng
+- **Organizer**: tạo và quản lý sự kiện, cấu hình vé
+- **Admin**: quản trị toàn hệ thống
+
 
 ## 📋 Mô tả dự án
 
@@ -8,6 +21,8 @@
 
 - **Frontend**: Next.js với TypeScript, Tailwind CSS + SCSS
 - **Backend**: NestJS với TypeScript, Swagger UI
+- **Database**: PostgreSQL, Prisma ORM ,  Migration & transaction , Soft delete
+- **Authentication & Authorization** : JWT (access token & refresh token), Role-based access control (USER / ORGANIZER / ADMIN) , Custom guards & decorators
 - **Features**: Server-Side Rendering, SEO-optimized
 
 ## 📁 Cấu trúc dự án
