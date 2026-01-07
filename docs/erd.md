@@ -1,84 +1,84 @@
 ```mermaid
 erDiagram
-    USER ||--o{ ORDER : places
-    EVENT ||--o{ TICKET_TYPE : defines
-    EVENT ||--o{ SEAT : has
-    ORDER ||--o{ ORDER_ITEM : contains
-    ORDER ||--o{ TICKET : issues
-    TICKET_TYPE ||--o{ TICKET : mints
-    SEAT ||--o| TICKET : assigned
+  USER ||--o{ EVENT : organizes
+  USER ||--o{ ORDER : places
+  EVENT ||--o{ TICKET_TYPE : has
+  ORDER ||--o{ TICKET : contains
+  TICKET_TYPE ||--o{ TICKET : generates
+  EVENT ||--o{ CHECK_IN : has
+  TICKET ||--o{ CHECK_IN : scanned
 
-    USER {
-        id string
-        email string
-        password_hash string
-        role string
-        created_at string
-        updated_at string
-    }
+  USER {
+    uuid id PK
+    string email UK
+    string passwordHash
+    string fullName
+    enum role
+    datetime createdAt
+    datetime updatedAt
+  }
 
-    EVENT {
-        id string
-        organizer_id string
-        title string
-        venue string
-        start_time string
-        end_time string
-        has_seat boolean
-        status string
-        created_at string
-        updated_at string
-    }
+  EVENT {
+    uuid id PK
+    uuid organizerId FK
+    string title
+    string description
+    string location
+    datetime startsAt
+    datetime endsAt
+    enum status
+    datetime createdAt
+    datetime updatedAt
+  }
 
-    TICKET_TYPE {
-        id string
-        event_id string
-        name string
-        price number
-        zone string
-        quantity number
-        created_at string
-        updated_at string
-    }
+  TICKET_TYPE {
+    uuid id PK
+    uuid eventId FK
+    string name
+    int price
+    int quantityTotal
+    int quantitySold
+    datetime saleStartsAt
+    datetime saleEndsAt
+    enum status
+    datetime createdAt
+    datetime updatedAt
+  }
 
-    SEAT {
-        id string
-        event_id string
-        zone string
-        row_label string
-        seat_number string
-        status string
-        expire_at string
-        created_at string
-        updated_at string
-    }
+  ORDER {
+    uuid id PK
+    uuid userId FK
+    uuid eventId FK
+    int subtotal
+    int discount
+    int total
+    enum status
+    string currency
+    datetime createdAt
+    datetime updatedAt
+  }
 
-    ORDER {
-        id string
-        user_id string
-        total_amount number
-        status string
-        created_at string
-        updated_at string
-    }
+  TICKET {
+    uuid id PK
+    uuid orderId FK
+    uuid ticketTypeId FK
+    uuid eventId FK
+    string code UK
+    enum status
+    datetime issuedAt
+    datetime usedAt
+    datetime createdAt
+    datetime updatedAt
+  }
 
-    ORDER_ITEM {
-        id string
-        order_id string
-        ticket_type_id string
-        ticket_id string
-        price number
-        created_at string
-    }
+  CHECK_IN {
+    uuid id PK
+    uuid eventId FK
+    uuid ticketId FK
+    uuid scannedById FK
+    datetime scannedAt
+    string gate
+    string note
+  }
 
-    TICKET {
-        id string
-        order_id string
-        ticket_type_id string
-        seat_id string
-        qr_code string
-        status string
-        created_at string
-        updated_at string
-    }
 ```
