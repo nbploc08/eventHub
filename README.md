@@ -116,87 +116,111 @@ cd minishop
 - **Package Manager**: Có thể dùng npm hoặc yarn (không trộn lẫn)
 - **Development**: Yarn thường nhanh hơn và cache tốt hơn
 # eventHub
+
+
+
 ```mermaid
 erDiagram
     USER ||--o{ ORDER : places
+    USER ||--o{ EVENT : organizes
+
     EVENT ||--o{ TICKET_TYPE : defines
     EVENT ||--o{ SEAT : has
+
     ORDER ||--o{ ORDER_ITEM : contains
     ORDER ||--o{ TICKET : issues
+    ORDER ||--|| PAYMENT : paid_by
+
     TICKET_TYPE ||--o{ TICKET : mints
-    SEAT ||--o| TICKET : assigned
+    TICKET_TYPE ||--o{ ORDER_ITEM : referenced_by
+
+    SEAT ||--|| TICKET : assigned_to
+
+    ORDER_ITEM ||--|| TICKET : produces
 
     USER {
-        id string
-        email string
-        password_hash string
-        role string
-        created_at string
-        updated_at string
+        uuid id PK
+        string email
+        string passwordHash
+        enum role
+        boolean isActive
+        datetime createdAt
+        datetime updatedAt
     }
 
     EVENT {
-        id string
-        organizer_id string
-        title string
-        venue string
-        start_time string
-        end_time string
-        has_seat boolean
-        status string
-        created_at string
-        updated_at string
+        uuid id PK
+        uuid organizerId FK
+        string title
+        string description
+        string venue
+        datetime startTime
+        datetime endTime
+        boolean hasSeat
+        enum status
+        datetime createdAt
+        datetime updatedAt
     }
 
     TICKET_TYPE {
-        id string
-        event_id string
-        name string
-        price number
-        zone string
-        quantity number
-        created_at string
-        updated_at string
+        uuid id PK
+        uuid eventId FK
+        string name
+        decimal price
+        string zone
+        int quantity
+        datetime createdAt
+        datetime updatedAt
     }
 
     SEAT {
-        id string
-        event_id string
-        zone string
-        row_label string
-        seat_number string
-        status string
-        expire_at string
-        created_at string
-        updated_at string
+        uuid id PK
+        uuid eventId FK
+        string zone
+        string rowLabel
+        string seatNumber
+        enum status
+        datetime expireAt
+        datetime createdAt
+        datetime updatedAt
     }
 
     ORDER {
-        id string
-        user_id string
-        total_amount number
-        status string
-        created_at string
-        updated_at string
+        uuid id PK
+        uuid userId FK
+        decimal totalAmount
+        enum status
+        datetime createdAt
+        datetime updatedAt
     }
 
     ORDER_ITEM {
-        id string
-        order_id string
-        ticket_type_id string
-        ticket_id string
-        price number
-        created_at string
+        uuid id PK
+        uuid orderId FK
+        uuid ticketTypeId FK
+        uuid ticketId FK
+        decimal price
+        datetime createdAt
     }
 
     TICKET {
-        id string
-        order_id string
-        ticket_type_id string
-        seat_id string
-        qr_code string
-        status string
-        created_at string
-        updated_at string
+        uuid id PK
+        uuid orderId FK
+        uuid ticketTypeId FK
+        uuid seatId FK
+        string qrCode
+        enum status
+        datetime createdAt
+        datetime updatedAt
     }
 
+    PAYMENT {
+        uuid id PK
+        uuid orderId FK
+        string provider
+        enum status
+        json payload
+        datetime createdAt
+    }
+
+```
