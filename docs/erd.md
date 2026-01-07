@@ -1,11 +1,12 @@
+```mermaid
 erDiagram
-USER ||--o{ ORDER : places
-EVENT ||--o{ TICKET_TYPE : defines
-EVENT ||--o{ SEAT : has
-ORDER ||--o{ ORDER_ITEM : contains
-ORDER ||--o{ TICKET : issues
-TICKET_TYPE ||--o{ TICKET : mints
-SEAT ||--o| TICKET : assigned
+    USER ||--o{ ORDER : places
+    EVENT ||--o{ TICKET_TYPE : defines
+    EVENT ||--o{ SEAT : has
+    ORDER ||--o{ ORDER_ITEM : contains
+    ORDER ||--o{ TICKET : issues
+    TICKET_TYPE ||--o{ TICKET : mints
+    SEAT ||--o| TICKET : assigned
 
     USER {
         id string
@@ -80,3 +81,4 @@ SEAT ||--o| TICKET : assigned
         created_at string
         updated_at string
     }
+```
