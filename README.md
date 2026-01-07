@@ -116,7 +116,7 @@ cd minishop
 - **Package Manager**: Có thể dùng npm hoặc yarn (không trộn lẫn)
 - **Development**: Yarn thường nhanh hơn và cache tốt hơn
 # eventHub
-
+```mermaid
 erDiagram
     USER ||--o{ ORDER : places
     EVENT ||--o{ TICKET_TYPE : defines
