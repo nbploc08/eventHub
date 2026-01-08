@@ -76,3 +76,22 @@
 //   .finally(async () => {
 //     await prisma.$disconnect();
 //   });
+
+import { PrismaClient } from '@prisma/client';
+import { seedUsers } from './seeds/user.seed';
+
+const prisma = new PrismaClient();
+
+async function main() {
+  console.log('🌱 Bắt đầu seed...');
+
+  try {
+    // Seed Users
+    await seedUsers(prisma);
+  } catch (error) {
+    console.error('❌ Lỗi:', error);
+    throw error;
+  }
+}
+
+main();

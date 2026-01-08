@@ -95,6 +95,9 @@ export class UsersService {
     if (!existingUser) {
       throw new BadRequestException(MESSAGE_KEYS.COMMON.NOT_FOUND);
     }
+    if (updateUserDto.email && (await this.userExists(updateUserDto.email))) {
+      throw new BadRequestException(MESSAGE_KEYS.COMMON.ALREADY_EXISTS);
+    }
     const user = await this.prisma.user.update({
       where: { id },
       data: {
