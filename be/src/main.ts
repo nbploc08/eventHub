@@ -4,6 +4,9 @@ import { AppModule } from '@/app.module';
 import { HttpExceptionFilter } from '@/share/filters/http-exception.filter';
 import { ValidationPipe } from '@nestjs/common';
 import { TransformInterceptor } from '@/share/interceptors/transform.interceptor';
+import * as cookieParser from 'cookie-parser';
+import { PermissionsGuard } from '@/share/guard/permissions.guard';
+import { Reflector } from '@nestjs/core';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -16,6 +19,12 @@ async function bootstrap() {
 
   // Standardize success response
   app.useGlobalInterceptors(new TransformInterceptor());
+
+  // Use cookie parser
+  app.use(cookieParser());
+
+  // Use permissions guard
+  app.useGlobalGuards(new PermissionsGuard(new Reflector()));
 
   // Use class-validator and class-transformer
   app.useGlobalPipes(

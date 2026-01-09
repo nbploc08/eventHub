@@ -8,7 +8,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import { MESSAGE_KEYS } from '@/share/messages';
-import { UserResponseDto } from './dto/res.dto';
+import { UserAuthResponseDto, UserResponseDto } from './dto/res.dto';
 
 @Injectable()
 export class UsersService {
@@ -32,6 +32,13 @@ export class UsersService {
     return user ? true : false;
   }
 
+  async findByEmail(email: string): Promise<UserAuthResponseDto> {
+    const user = await this.prisma.user.findUnique({
+      where: { email: email },
+    });
+    return user as UserAuthResponseDto;
+  }
+
   async create(createUserDto: CreateUserDto): Promise<UserResponseDto> {
     if (await this.userExists(createUserDto.email)) {
       throw new BadRequestException(MESSAGE_KEYS.COMMON.ALREADY_EXISTS);
@@ -42,6 +49,7 @@ export class UsersService {
         email: createUserDto.email,
         passwordHash: passwordHash,
         role: createUserDto.role,
+        isActive: createUserDto.isActive,
       },
       select: {
         id: true,
@@ -126,6 +134,65 @@ export class UsersService {
         email: true,
         role: true,
         isActive: true,
+      },
+    });
+  }
+  async updateRefreshToken(
+    id: string,
+    refreshTokenNew: string,
+    dataDevice: any,
+    refreshTokenOld?: string,
+  ) {
+    return await this.prisma.refreshToken.upsert({
+      where: {
+        userId: id,
+        tokenHash: refreshTokenOld ?? '',
+        deviceName: dataDevice.deviceName,
+        ipAddress: dataDevice.ip,
+        userAgent: dataDevice.userAgent,
+      },
+      update: { tokenHash: refreshTokenNew },
+      create: {
+        userId: id,
+        tokenHash: refreshTokenNew,
+        deviceName: dataDevice.deviceName,
+        ipAddress: dataDevice.ip,
+        userAgent: dataDevice.userAgent,
+      },
+    });
+  }
+  async findByRefreshToken(
+    id: string,
+    refreshToken: string,
+    dataDevice: any,
+  ): Promise<UserAuthResponseDto> {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        id: id,
+        refreshTokens: {
+          some: {
+            tokenHash: refreshToken,
+            deviceName: dataDevice.deviceName,
+            ipAddress: dataDevice.ip,
+            userAgent: dataDevice.userAgent,
+          },
+        },
+      },
+    });
+    return user as UserAuthResponseDto;
+  }
+
+  async removeRefreshToken(id: string, refreshToken: string, dataDevice: any) {
+    return await this.prisma.refreshToken.update({
+      where: {
+        userId: id,
+        tokenHash: refreshToken,
+        deviceName: dataDevice.deviceName,
+        ipAddress: dataDevice.ip,
+        userAgent: dataDevice.userAgent,
+      },
+      data: {
+        isRevoked: true,
       },
     });
   }

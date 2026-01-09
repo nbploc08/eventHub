@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -31,6 +32,9 @@ import {
   DELETE_USER_RESPONSE,
   DELETE_USER_400_RESPONSE,
 } from './swagger/user.swagger';
+import { JwtAuthGuard } from '../auth/jwt/jwt-auth.guard';
+import { RequirePermissions } from '@/share/decorators/decorator';
+import { Permission } from '@/share/enum';
 
 @Controller('users')
 @USERS_TAG
@@ -42,6 +46,7 @@ export class UsersController {
   @CREATE_USER_BODY
   @CREATE_USER_RESPONSE
   @CREATE_USER_400_RESPONSE
+  @RequirePermissions(Permission.USER_CREATE)
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
@@ -49,6 +54,7 @@ export class UsersController {
   @Get()
   @GET_ALL_USERS_OPERATION
   @GET_ALL_USERS_RESPONSE
+  @RequirePermissions(Permission.USER_READ)
   findAll() {
     return this.usersService.findAll();
   }
@@ -57,6 +63,7 @@ export class UsersController {
   @GET_USER_BY_ID_OPERATION
   @GET_USER_BY_ID_PARAM
   @GET_USER_BY_ID_RESPONSE
+  @RequirePermissions(Permission.USER_READ)
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(id);
   }
@@ -67,6 +74,7 @@ export class UsersController {
   @UPDATE_USER_BODY
   @UPDATE_USER_RESPONSE
   @UPDATE_USER_400_RESPONSE
+  @RequirePermissions(Permission.USER_UPDATE)
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(id, updateUserDto);
   }
@@ -76,6 +84,7 @@ export class UsersController {
   @DELETE_USER_PARAM
   @DELETE_USER_RESPONSE
   @DELETE_USER_400_RESPONSE
+  @RequirePermissions(Permission.USER_DELETE)
   remove(@Param('id') id: string) {
     return this.usersService.remove(id);
   }

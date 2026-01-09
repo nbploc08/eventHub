@@ -51,6 +51,35 @@ enum PaymentStatus {
 //////////////////////
 // MODELS
 //////////////////////
+model EmailOtp {
+  id          String   @id @default(uuid())
+  userId      String
+  codeHash    String
+  expiresAt   DateTime
+  attempts    Int      @default(0)
+  createdAt   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@map("emailOtps")
+}
+
+model RefreshToken {
+  id          String   @id @default(uuid())
+  userId      String
+  tokenHash   String   @unique
+  isRevoked   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  deviceName  String?
+  ipAddress   String?
+  userAgent   String?
+
+  user User @relation(fields: [userId], references: [id],onDelete: Cascade )
+
+    @@map("refreshTokens")
+}
 
 model User {
   id           String   @id @default(uuid())
@@ -59,6 +88,8 @@ model User {
   role         UserRole @default(USER)
   isActive     Boolean  @default(true)
 
+  refreshTokens RefreshToken[]
+  emailOtps      EmailOtp[]
   orders       Order[]
   events       Event[]  @relation("OrganizerEvents")
 
